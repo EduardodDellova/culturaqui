@@ -35,6 +35,8 @@ exports.buscarPorId = (id) => {
   return u ? publico(u) : null;
 };
 
+exports.listar = () => ler(ARQUIVO).map(publico);
+
 exports.criar = ({ usuario, email, senha, plano }) => {
   const lista = ler(ARQUIVO);
   const novo = {

@@ -1,0 +1,19 @@
+<%- include('partials/topo', { css: ['/css/auth.css', '/css/admin.css'] }) %>
+<section class="wrap auth admin-login">
+  <span class="tag">Área administrativa</span>
+  <h1>Entrar como <span><%= administrador.nome %>.</span></h1>
+  <p class="lead">Acesso restrito à administração do CulturAqui.</p>
+  <% if (locals.erroGeral) { %><p class="alerta alerta--erro" role="alert"><%= erroGeral %></p><% } %>
+  <form class="cartao" action="/admin/entrar" method="post">
+    <div class="campo">
+      <label for="nome">Administrador</label>
+      <div class="entrada"><input id="nome" name="nome" value="<%= administrador.nome %>" autocomplete="username" required></div>
+    </div>
+    <div class="campo">
+      <label for="senha">Senha administrativa</label>
+      <div class="entrada"><input id="senha" name="senha" type="password" autocomplete="current-password" required></div>
+    </div>
+    <button class="btn btn--verde btn--bloco" type="submit">Entrar</button>
+  </form>
+</section>
+<%- include('partials/rodape') %>

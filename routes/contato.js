@@ -25,27 +25,19 @@ router.post("/contato", regrasContato(), async (req, res, next) => {
   }
 
   try {
-    await emailEquipe.enviar(req.body);
+    mensagens.criar(req.body);
   } catch (erro) {
-    console.error("Falha ao enviar mensagem de contato:", erro);
-    const semConfiguracao = erro.code === "EMAIL_CONFIG_MISSING" || erro.code === "EMAIL_CONFIG_INVALID";
-    return res.status(semConfiguracao ? 503 : 502).render("contato", {
-      title: "Contato | CulturAqui",
-      erroGeral: semConfiguracao
-        ? "O envio de e-mail ainda não está configurado. Tente novamente mais tarde."
-        : "Não foi possível enviar sua mensagem agora. Tente novamente mais tarde.",
-      valores: req.body,
-      js,
-    });
+    console.error("Não foi possível arquivar a mensagem de contato:", erro);
+    return next(erro);
   }
 
   try {
-    mensagens.criar(req.body);
+    await emailEquipe.enviar(req.body);
   } catch (erro) {
-    console.error("E-mail enviado, mas não foi possível arquivar a mensagem:", erro);
+    console.error("Mensagem arquivada, mas falhou a notificação por e-mail:", erro);
     req.session.flash = {
       tipo: "aviso",
-      texto: "Sua mensagem foi enviada à equipe, mas não foi possível guardar uma cópia local.",
+      texto: "Sua mensagem foi registrada para a equipe, mas não foi possível enviar a notificação por e-mail.",
     };
     return res.redirect("/contato");
   }

@@ -1,0 +1,58 @@
+<%- include('partials/topo', { css: ['/css/admin.css'] }) %>
+<section class="wrap pagina admin">
+  <div class="admin__topo">
+    <div>
+      <span class="tag">Área administrativa</span>
+      <h1>Olá, <%= administrador.nome %></h1>
+      <p class="lead">Consulte contas e sugestões recebidas.</p>
+    </div>
+    <form action="/admin/sair" method="post">
+      <button class="btn btn--verde" type="submit">Sair</button>
+    </form>
+  </div>
+
+  <section class="admin__secao" aria-labelledby="contas-titulo">
+    <h2 id="contas-titulo">Contas de usuários</h2>
+    <p class="admin__aviso">As senhas não são exibidas nem podem ser recuperadas; ficam protegidas por hash.</p>
+    <form class="admin__busca" action="/admin" method="get" role="search">
+      <label for="q">Buscar por nome de usuário ou e-mail</label>
+      <div class="entrada">
+        <input id="q" name="q" value="<%= busca %>" type="search" autocomplete="off">
+        <button class="btn btn--verde" type="submit">Buscar</button>
+      </div>
+    </form>
+    <% if (contas.length) { %>
+      <div class="admin__tabela-wrap">
+        <table class="admin__tabela">
+          <thead><tr><th scope="col">Nome de usuário</th><th scope="col">E-mail</th></tr></thead>
+          <tbody><% contas.forEach(function (conta) { %>
+            <tr><td><%= conta.usuario %></td><td><%= conta.email %></td></tr>
+          <% }) %></tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <p class="admin__vazio">Nenhuma conta encontrada.</p>
+    <% } %>
+  </section>
+
+  <section class="admin__secao" aria-labelledby="sugestoes-titulo">
+    <h2 id="sugestoes-titulo">Sugestões recebidas</h2>
+    <% if (sugestoes.length) { %>
+      <ul class="admin__lista">
+        <% sugestoes.forEach(function (sugestao) { %>
+          <li class="admin__item">
+            <div class="admin__item-topo">
+              <strong><%= sugestao.nome %></strong>
+              <a href="mailto:<%= sugestao.email %>"><%= sugestao.email %></a>
+            </div>
+            <p><%= sugestao.mensagem %></p>
+            <time datetime="<%= sugestao.enviadaEm %>"><%= new Date(sugestao.enviadaEm).toLocaleString('pt-BR') %></time>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p class="admin__vazio">Ainda não há sugestões enviadas.</p>
+    <% } %>
+  </section>
+</section>
+<%- include('partials/rodape') %>

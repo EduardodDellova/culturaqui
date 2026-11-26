@@ -1,0 +1,27 @@
+.admin { padding-top: 32px; padding-bottom: 48px; }
+.admin h1 { margin-top: 12px; }
+.admin__topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.admin__secao { margin-top: 32px; padding: 22px; border: 1px solid var(--line); border-radius: var(--raio); background: #fff; }
+.admin__secao h2 { margin-bottom: 12px; }
+.admin__aviso, .admin__vazio { margin: 8px 0 16px; color: var(--gray); font-size: 14px; }
+.admin__busca { margin: 18px 0; }
+.admin__busca label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; }
+.admin__busca .entrada { display: flex; gap: 10px; }
+.admin__busca input { min-width: 0; flex: 1; padding: 0 12px; border: 1px solid var(--field); border-radius: var(--raio-campo); }
+.admin__tabela-wrap { overflow-x: auto; }
+.admin__tabela { width: 100%; border-collapse: collapse; text-align: left; }
+.admin__tabela th, .admin__tabela td { padding: 12px 10px; border-bottom: 1px solid var(--line); }
+.admin__tabela th { color: var(--gray); font-size: 13px; }
+.admin__lista { display: grid; gap: 12px; }
+.admin__item { padding: 16px; border: 1px solid var(--line); border-radius: 12px; overflow-wrap: anywhere; }
+.admin__item-topo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
+.admin__item a { color: var(--green); }
+.admin__item p { margin: 12px 0; white-space: pre-wrap; }
+.admin__item time { color: var(--gray); font-size: 12px; }
+.admin-login .cartao { display: grid; gap: 14px; }
+.admin-login .alerta { margin-top: 16px; }
+
+@media (min-width: 768px) {
+  .admin { padding-top: 48px; }
+  .admin__secao { padding: 28px; }
+}

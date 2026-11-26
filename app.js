@@ -7,6 +7,7 @@ const locais = require("./middlewares/locais");
 const rotasPaginas = require("./routes/paginas");
 const rotasAuth = require("./routes/auth");
 const rotasContato = require("./routes/contato");
+const rotasAdmin = require("./routes/admin");
 
 const app = express();
 const producao = process.env.NODE_ENV === "production";
@@ -39,6 +40,17 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  const rotasAdmin = ["/admin", "/admin/entrar", "/admin/sair"];
+  if (!req.session.administrador || rotasAdmin.includes(req.path)) return next();
+
+  req.session.regenerate((erro) => {
+    if (erro) return next(erro);
+    res.clearCookie("connect.sid");
+    next();
+  });
+});
+
 // Disponibiliza usuário logado, página atual e mensagens para todas as views
 app.use(locais);
 
@@ -46,6 +58,7 @@ app.use(locais);
 app.use("/", rotasPaginas);
 app.use("/", rotasAuth);
 app.use("/", rotasContato);
+app.use("/", rotasAdmin);
 
 // 404: nenhuma rota atendeu
 app.use((req, res) => {
