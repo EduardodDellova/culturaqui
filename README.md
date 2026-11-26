@@ -7,6 +7,8 @@ npm start                # abre em http://localhost:3000
 
 Requer Node 18 ou mais novo. Se o `.env` já existir, edite-o em vez de copiá-lo novamente: ele contém configurações locais e não deve ser compartilhado.
 
+O formulário arquiva a mensagem e responde sem esperar o servidor SMTP; a notificação é tentada em segundo plano. Se ela falhar, consulte os logs do serviço no Render. O envio usa limites de conexão para evitar esperas longas.
+
 
 ## Área administrativa
 
@@ -48,8 +50,3 @@ A sessão administrativa é encerrada automaticamente quando o admin navega para
 | `/perfil` | Área do usuário (pontos, dados, sair e excluir conta) | só logados |
 | `POST /conta/excluir` | Exclui a conta (pede a senha para confirmar); o e-mail e o usuário ficam livres para novo cadastro | só logados |
 | qualquer outro | Página 404 | — |
-
-
-## Segurança já aplicada
-
-Senha com hash scrypt e comparação em tempo constante; mensagem única "Usuário ou senha incorretos"; cookie de sessão `httpOnly`, `sameSite=lax` e `secure` em produção; troca do id da sessão no login; logout por POST; exclusão de conta por POST com confirmação de senha; textos escapados pelo EJS (`<%= %>`); validação duplicada (navegador + servidor). Não há proteção contra excesso de tentativas de login nem CSRF token: seriam próximos passos.

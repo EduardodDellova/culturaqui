@@ -12,7 +12,7 @@ router.get("/contato", (req, res) => {
   res.render("contato", { title: "Contato | CulturAqui", js });
 });
 
-router.post("/contato", regrasContato(), async (req, res, next) => {
+router.post("/contato", regrasContato(), (req, res, next) => {
   const resultado = validationResult(req);
 
   if (!resultado.isEmpty()) {
@@ -31,18 +31,16 @@ router.post("/contato", regrasContato(), async (req, res, next) => {
     return next(erro);
   }
 
-  try {
-    await emailEquipe.enviar(req.body);
-  } catch (erro) {
-    console.error("Mensagem arquivada, mas falhou a notificação por e-mail:", erro);
-    req.session.flash = {
-      tipo: "aviso",
-      texto: "Sua mensagem foi registrada para a equipe, mas não foi possível enviar a notificação por e-mail.",
-    };
-    return res.redirect("/contato");
-  }
-
-  req.session.flash = { tipo: "sucesso", texto: "Mensagem enviada! Responderemos em breve." };
+  const dadosMensagem = { ...req.body };
+  req.session.flash = {
+    tipo: "sucesso",
+    texto: "Mensagem registrada! A notificação por e-mail será tentada em segundo plano.",
+  };
+  res.once("finish", () => {
+    emailEquipe.enviar(dadosMensagem).catch((erro) => {
+      console.error("Mensagem arquivada, mas falhou a notificação por e-mail:", erro);
+    });
+  });
   res.redirect("/contato"); // PRG: evita reenviar o formulário ao atualizar a página
 });
 

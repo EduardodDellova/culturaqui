@@ -43,6 +43,9 @@ exports.enviar = async ({ nome, email, assunto, mensagem }) => {
     port: config.porta,
     secure: config.seguro,
     auth: { user: config.usuario, pass: config.senha },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
   });
 
   await transporte.sendMail({
