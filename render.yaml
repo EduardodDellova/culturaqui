@@ -1,0 +1,23 @@
+# Configuração de hospedagem no Render (https://render.com).
+# Passo a passo completo no README.md, seção "Como hospedar".
+services:
+  - type: web
+    name: culturaqui
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: EMAIL_DESTINO
+        value: culturaquii@gmail.com
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false

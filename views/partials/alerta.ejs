@@ -1,0 +1,6 @@
+<%# Mensagem avisando sucesso, aviso ou erro (vinda da sessão: "flash"). %>
+<% if (flash) { %>
+<div class="wrap">
+  <div class="alerta alerta--<%= flash.tipo %>" role="status"><%= flash.texto %></div>
+</div>
+<% } %>

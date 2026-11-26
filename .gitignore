@@ -1,0 +1,4 @@
+node_modules/
+.env
+# dados gerados pelo site (usuários e mensagens)
+storage/*.json

@@ -1,0 +1,13 @@
+<%- include('partials/topo', { css: ['/css/paginas.css'] }) %>
+<section class="wrap pagina">
+  <nav aria-label="Você está em"><ol class="migalhas"><li><a href="/">Início</a></li><li aria-current="page">Sobre</li></ol></nav>
+  <h1>Sobre o projeto</h1>
+  <p class="lead">O CulturAqui é um projeto de TCC que reúne a agenda cultural de São Paulo em um só lugar.</p>
+  <div class="blocos">
+    <article class="bloco"><h2>Nossa ideia</h2><p>Facilitar o acesso à cultura: shows, teatro, livros, esportes, exposições e programas infantis, com um programa de pontos que recompensa quem participa.</p></article>
+    <article class="bloco"><h2>Como foi feito</h2><p>Site em Node.js com Express e EJS, HTML semântico, CSS e JavaScript externos, layout mobile first e validação de formulários no navegador e no servidor.</p></article>
+    <article class="bloco"><h2>Aviso</h2><p>Eventos, planos, preços e depoimentos são exemplos para demonstração. Nenhuma compra é realizada.</p></article>
+  </div>
+  <a class="btn btn--verde" href="/contato">Fale com a gente<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</section>
+<%- include('partials/rodape') %>

@@ -1,0 +1,14 @@
+<%# Card de plano. Recebe: p (um item de data/planos.js). %>
+<article class="plan<%= p.destaque ? ' plan--destaque' : '' %>">
+  <% if (p.selo) { %><span class="plan__selo"><%= p.selo %></span><% } %>
+  <h3><%= p.nome %></h3>
+  <p class="plan__desc"><%= p.descricao %></p>
+  <p class="plan__etiqueta"><%= p.etiqueta %></p>
+  <p class="plan__preco"><small>R$</small><b><%= p.preco %></b><span><%= p.sufixo %></span></p>
+  <p class="plan__depois"><%= p.depois %></p>
+  <ul class="plan__itens">
+    <% p.itens.forEach(function (i) { %><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><%= i %></li>
+    <% }) %>
+  </ul>
+  <a class="btn <%= p.destaque ? 'btn--verde' : 'btn--contorno' %>" href="/cadastro?plano=<%= p.id %>"><%= p.botao %><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</article>

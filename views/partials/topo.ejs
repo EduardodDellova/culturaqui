@@ -1,0 +1,35 @@
+<%#
+  TOPO de toda página: <head>, ícones, link "pular para o conteúdo", cabeçalho e abertura do <main>.
+  Recebe (opcionais): title, css (lista de CSS extra da página), descricao.
+  O fechamento (</main>, rodapé, scripts e </body>) está em rodape.ejs.
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= locals.descricao || site.descricao %>">
+  <meta name="theme-color" content="#10294A">
+  <title><%= locals.title || site.nome %></title>
+
+  <link rel="icon" type="image/png" href="/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Lora:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<% (locals.css || []).forEach(function (arquivo) { %>  <link rel="stylesheet" href="<%= arquivo %>">
+<% }) %></head>
+<body>
+<%- include('icones') %>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<%- include('cabecalho') %>
+<%- include('alerta') %>
+<main id="conteudo">
+<% if (caminho !== '/') { %>
+  <div class="wrap acao-voltar">
+    <a class="acao-voltar__link" href="/" data-voltar aria-label="Voltar à página anterior">
+      <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <span>Voltar</span>
+    </a>
+  </div>
+<% } %>

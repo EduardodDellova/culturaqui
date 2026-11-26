@@ -1,0 +1,22 @@
+<%- include('partials/topo', { css: ['/css/auth.css'] }) %>
+<section class="wrap auth">
+  <span class="tag">Crie sua conta</span>
+  <h1>Faça seu cadastro <span>no CulturAqui.</span></h1>
+  <p class="lead">Crie seu acesso e comece a descobrir um mundo de possibilidades culturais.</p>
+  <div class="bonus">
+    <span class="bonus__icone"><svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg></span>
+    <span><strong>+1000 pontos de boas-vindas</strong><small>Ganhe ao criar a sua conta.</small></span>
+  </div>
+  <form class="cartao" action="/cadastro" method="post" novalidate data-validar>
+    <%- include('partials/campo', { id: 'usuario', label: 'Nome de usuário', icone: 'user', placeholder: 'Nome de usuário', autocomplete: 'username', regras: 'obrigatorio|min:3|max:20|usuario', ajuda: 'Letras, números, ponto e _ (3 a 20).' }) %>
+    <%- include('partials/campo', { id: 'email', label: 'E-mail', icone: 'mail', tipo: 'email', placeholder: 'Digite seu e-mail', autocomplete: 'email', regras: 'obrigatorio|email' }) %>
+    <%- include('partials/campo', { id: 'senha', label: 'Senha', icone: 'lock', tipo: 'password', placeholder: 'Digite sua senha', autocomplete: 'new-password', regras: 'obrigatorio|min:8|max:64|senha', ajuda: 'Mínimo de 8 caracteres, com letra e número.' }) %>
+    <%- include('partials/campo', { id: 'confirmar', label: 'Confirmar senha', icone: 'lock', tipo: 'password', placeholder: 'Confirme sua senha', autocomplete: 'new-password', regras: 'obrigatorio|igual:#senha' }) %>
+    <%- include('partials/campo', { id: 'plano', label: 'Plano (opcional)', tipo: 'select', icone: 'ticket', opcoes: [
+      { valor: 'ultra', texto: 'Cultura Ultra' }, { valor: 'confort', texto: 'Cultura Confort' }, { valor: 'basico', texto: 'Cultura Básico' }] }) %>
+    <%- include('partials/campo', { id: 'termos', tipo: 'checkbox', regras: 'obrigatorio', rotuloHtml: 'Aceito os termos de uso e a política de privacidade do projeto.' }) %>
+    <button class="btn btn--verde btn--bloco" type="submit">Criar conta<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  </form>
+  <p class="alt">Já tem uma conta? <a href="/login">Entrar<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+</section>
+<%- include('partials/rodape') %>

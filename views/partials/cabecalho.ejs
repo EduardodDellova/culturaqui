@@ -1,0 +1,49 @@
+<%# Cabeçalho com logo e navegação textual em telas maiores. %>
+<header class="topo">
+  <div class="wrap topo__linha">
+    <a class="marca" href="/" aria-label="<%= site.nome %> - início">
+      <img src="/img/logo.png" alt="" width="36" height="36">
+      <span class="marca__nome">Cultur<b>Aqui</b></span>
+    </a>
+
+    <nav class="topo__nav" id="menu-principal" aria-label="Principal">
+      <ul class="nav">
+        <% site.menu.forEach(function (item) {
+             const atual = item.href === '/' ? caminho === '/' : caminho.indexOf(item.href) === 0; %>
+        <li><a class="nav__link" href="<%= item.href %>"<% if (atual) { %> aria-current="page"<% } %>><%= item.texto %></a></li>
+        <% }) %>
+      </ul>
+
+      <div class="topo__conta">
+        <% if (usuario) { %>
+          <a class="conta__nome" href="/perfil"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>Olá, <%= usuario.usuario %></a>
+          <form action="/sair" method="post">
+            <button class="btn btn--contorno btn--pq" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg>Sair</button>
+          </form>
+        <% } else { %>
+          <a class="conta__entrar" href="/login">Entrar</a>
+          <a class="btn btn--verde btn--pq" href="/cadastro">Criar conta</a>
+        <% } %>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<nav class="nav-inferior" aria-label="Navegação rápida">
+  <a class="nav-inferior__link" href="/" aria-label="Início"<% if (caminho === '/') { %> aria-current="page"<% } %>>
+    <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>
+    <span>Início</span>
+  </a>
+  <a class="nav-inferior__link" href="/eventos" aria-label="Explorar eventos"<% if (caminho.indexOf('/eventos') === 0) { %> aria-current="page"<% } %>>
+    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+    <span>Eventos</span>
+  </a>
+  <a class="nav-inferior__link" href="<%= usuario ? '/perfil' : '/login' %>" aria-label="<%= usuario ? 'Meu perfil' : 'Entrar na minha conta' %>"<% if (caminho.indexOf('/perfil') === 0 || caminho === '/login' || caminho === '/cadastro') { %> aria-current="page"<% } %>>
+    <svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>
+    <span>Perfil</span>
+  </a>
+  <a class="nav-inferior__link" href="/sobre" aria-label="Sobre o CulturAqui"<% if (caminho === '/sobre') { %> aria-current="page"<% } %>>
+    <svg class="icon" aria-hidden="true"><use href="#i-drama"/></svg>
+    <span>Sobre</span>
+  </a>
+</nav>

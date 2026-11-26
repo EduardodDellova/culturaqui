@@ -1,0 +1,17 @@
+<%# Card de evento. Recebe: e (um item de data/eventos.js). %>
+<li class="ev-card" data-busca="<%= (e.titulo + ' ' + e.local + ' ' + e.resumo).toLowerCase() %>">
+  <a class="ev-card__link" href="/eventos/<%= e.id %>">
+    <div class="ev-art">
+      <%- include('poster', { variant: e.poster }) %>
+      <span class="ev-tag"><%= e.categoriaNome %></span>
+    </div>
+    <div class="ev-body">
+      <h3><%= e.titulo %></h3>
+      <p class="ev-loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><%= e.local %></p>
+      <div class="ev-foot">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>Ganhe <%= e.pontos %> pontos</span>
+        <i><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></i>
+      </div>
+    </div>
+  </a>
+</li>

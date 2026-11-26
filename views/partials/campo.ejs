@@ -1,0 +1,56 @@
+<%#
+  Campo de formulário reutilizável (input, textarea, select ou checkbox).
+  Recebe: id, label
+  Opcionais: tipo ('text' padrão | 'email' | 'password' | 'textarea' | 'select' | 'checkbox'),
+             icone, placeholder, autocomplete, regras (texto lido por public/js/validacao.js),
+             opcoes (para select: [{valor, texto}]), ajuda, rotuloHtml (conteúdo HTML do rótulo do checkbox)
+  Lê automaticamente: valores[id] (valor digitado) e erros[id] (mensagem do servidor).
+%>
+<%
+  const tipo = locals.tipo || 'text';
+  const valor = valores[id] || '';
+  const erro = erros[id] ? erros[id].msg : '';
+  const descrito = [erro || true ? id + '-erro' : '', locals.ajuda ? id + '-ajuda' : ''].filter(Boolean).join(' ');
+  const atributos = 'id="' + id + '" name="' + id + '"'
+    + (locals.regras ? ' data-regras="' + locals.regras + '"' : '')
+    + (erro ? ' aria-invalid="true"' : '')
+    + ' aria-describedby="' + descrito + '"';
+%>
+<% if (tipo === 'checkbox') { %>
+<div class="campo campo--check<%= erro ? ' campo--erro' : '' %>">
+  <label class="check" for="<%= id %>">
+    <input type="checkbox" <%- atributos %><%= valor === 'on' ? ' checked' : '' %>>
+    <span><%- locals.rotuloHtml %></span>
+  </label>
+  <p class="campo__erro" id="<%= id %>-erro" role="alert"><%= erro %></p>
+</div>
+<% } else { %>
+<div class="campo<%= erro ? ' campo--erro' : '' %>">
+  <label for="<%= id %>"><%= label %></label>
+  <% if (tipo === 'textarea') { %>
+  <div class="entrada entrada--area">
+    <textarea <%- atributos %> rows="5" placeholder="<%= locals.placeholder || '' %>"><%= valor %></textarea>
+  </div>
+  <% } else if (tipo === 'select') { %>
+  <div class="entrada">
+    <% if (locals.icone) { %><svg class="icon" aria-hidden="true"><use href="#i-<%= icone %>"/></svg><% } %>
+    <select <%- atributos %>>
+      <option value="">Selecione</option>
+      <% (locals.opcoes || []).forEach(function (o) { %>
+      <option value="<%= o.valor %>"<%= valor === o.valor ? ' selected' : '' %>><%= o.texto %></option>
+      <% }) %>
+    </select>
+  </div>
+  <% } else { %>
+  <div class="entrada">
+    <% if (locals.icone) { %><svg class="icon" aria-hidden="true"><use href="#i-<%= icone %>"/></svg><% } %>
+    <input type="<%= tipo %>" <%- atributos %> placeholder="<%= locals.placeholder || '' %>" autocomplete="<%= locals.autocomplete || 'off' %>"<% if (valor && tipo !== 'password') { %> value="<%= valor %>"<% } %>>
+    <% if (tipo === 'password') { %>
+    <button class="entrada__olho" type="button" aria-label="Mostrar senha"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></button>
+    <% } %>
+  </div>
+  <% } %>
+  <% if (locals.ajuda) { %><p class="campo__ajuda" id="<%= id %>-ajuda"><%= ajuda %></p><% } %>
+  <p class="campo__erro" id="<%= id %>-erro" role="alert"><%= erro %></p>
+</div>
+<% } %>

@@ -1,0 +1,22 @@
+<%- include('partials/topo', { css: ['/css/home.css', '/css/paginas.css'] }) %>
+<section class="wrap pagina">
+  <nav aria-label="Você está em"><ol class="migalhas"><li><a href="/">Início</a></li><li aria-current="page">Como funciona</li></ol></nav>
+  <h1>Como funciona</h1>
+  <p class="lead">Em três passos você descobre eventos, participa e acumula pontos.</p>
+  <ol class="passos-grandes">
+    <% passos.forEach(function (p) { %>
+    <li class="passo">
+      <span class="passos__n"><%= p.n %></span>
+      <span class="passos__icone"><svg class="icon" aria-hidden="true"><use href="#i-<%= p.icone %>"/></svg></span>
+      <h2><%= p.titulo %></h2>
+      <p><%= p.texto %></p>
+    </li>
+    <% }) %>
+  </ol>
+  <div class="cta">
+    <h2>Ganhe 1.000 pontos ao criar sua conta</h2>
+    <p>É gratuito e leva menos de um minuto.</p>
+    <a class="btn btn--amarelo" href="/cadastro">Criar conta<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+<%- include('partials/rodape') %>

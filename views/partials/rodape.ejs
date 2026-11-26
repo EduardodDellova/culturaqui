@@ -1,0 +1,46 @@
+<%# FECHAMENTO de toda página: </main>, rodapé, scripts externos e </body></html>. %>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <a class="marca marca--clara" href="/" aria-label="<%= site.nome %> - início">
+      <img src="/img/logo.png" alt="" width="36" height="36">
+      <span class="marca__nome">Cultur<b>Aqui</b></span>
+    </a>
+    <p class="rodape__texto">A cultura acontece aqui. Descubra, participe e viva São Paulo.</p>
+
+    <div class="rodape__colunas">
+      <nav aria-label="Rodapé">
+        <h2 class="rodape__titulo">Navegue</h2>
+        <ul>
+          <% site.menu.forEach(function (item) { %><li><a href="<%= item.href %>"><%= item.texto %></a></li>
+          <% }) %>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="rodape__titulo">Conta</h2>
+        <ul>
+          <% if (usuario) { %>
+          <li><a href="/perfil">Meu perfil</a></li>
+          <% } else { %>
+          <li><a href="/login">Entrar</a></li>
+          <li><a href="/cadastro">Criar conta</a></li>
+          <% } %>
+        </ul>
+      </div>
+      <address class="rodape__contato">
+        <h2 class="rodape__titulo">Contato</h2>
+        <ul>
+          <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+          <li><%= site.cidade %></li>
+        </ul>
+      </address>
+    </div>
+
+    <p class="rodape__copia">© <%= new Date().getFullYear() %> <%= site.nome %>.<% if (caminho === '/') { %> Protótipo de TCC.<% } %></p>
+  </div>
+</footer>
+
+<% (locals.js || []).forEach(function (arquivo) { %><script src="<%= arquivo %>"></script>
+<% }) %><script src="/js/navegacao.js"></script></body>
+</html>

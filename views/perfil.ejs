@@ -1,0 +1,25 @@
+<%- include('partials/topo', { css: ['/css/paginas.css'] }) %>
+<section class="wrap pagina">
+  <h1>Olá, <%= usuario.usuario %>!</h1>
+  <p class="lead">Esta é a sua área. Só quem está logado consegue ver esta página.</p>
+  <div class="blocos">
+    <article class="bloco bloco--pontos"><h2>Seus pontos</h2><p class="pontos-num"><%= usuario.pontos %></p><p>Pontos de boas-vindas já creditados.</p></article>
+    <article class="bloco"><h2>Seus dados</h2>
+      <dl class="dados"><div><dt>Usuário</dt><dd><%= usuario.usuario %></dd></div><div><dt>E-mail</dt><dd><%= usuario.email %></dd></div>
+      <div><dt>Plano</dt><dd><%= usuario.plano === 'nenhum' ? 'Nenhum plano escolhido' : usuario.plano %></dd></div></dl>
+    </article>
+  </div>
+  <a class="btn btn--verde" href="/eventos">Explorar eventos<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  <form class="perfil__sair" action="/sair" method="post">
+    <button class="btn btn--contorno btn--pq" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg>Sair da conta</button>
+  </form>
+  <details class="perigo">
+    <summary class="btn btn--perigo-contorno btn--pq">Excluir conta</summary>
+    <form class="perigo__form" action="/conta/excluir" method="post" novalidate data-validar>
+      <p class="perigo__aviso"><strong>Essa ação não pode ser desfeita.</strong> Seu cadastro e seus pontos serão apagados, e o e-mail e o nome de usuário poderão ser usados em um novo cadastro.</p>
+      <%- include('partials/campo', { id: 'senha', label: 'Digite sua senha para confirmar', icone: 'lock', tipo: 'password', placeholder: 'Sua senha', autocomplete: 'current-password', regras: 'obrigatorio' }) %>
+      <button class="btn btn--perigo btn--pq" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>Excluir minha conta definitivamente</button>
+    </form>
+  </details>
+</section>
+<%- include('partials/rodape', { js: ['/js/senha.js', '/js/validacao.js'] }) %>

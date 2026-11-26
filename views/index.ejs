@@ -1,0 +1,106 @@
+<%- include('partials/topo', { css: ['/css/home.css'] }) %>
+
+<section class="hero wrap" id="inicio">
+  <div class="hero__texto">
+    <span class="tag">Seu roteiro cultural em São Paulo</span>
+    <h1>A cidade tem mil histórias. <span>Viva a sua.</span></h1>
+    <p class="lead">Descubra shows, teatros, exposições e experiências culturais. Explore mais, aproveite cada momento e acumule pontos pelo caminho.</p>
+    <div class="hero__acoes">
+      <a class="btn btn--verde" href="/eventos">Explorar eventos<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="link-mais" href="/como-funciona">Como funciona<svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+    </div>
+  </div>
+  <div class="hero__arte">
+    <div class="hero__cartaz"><%- include('partials/poster', { variant: 'hero' }) %></div>
+    <div class="chip">
+      <span class="chip__icone"><svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg></span>
+      <span><strong>Seu próximo evento?</strong><small>Encontre aqui no CulturAqui.</small></span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap secao" id="explorar">
+  <p class="overline">Encontre seu próximo programa</p>
+  <h2>Explore do seu jeito</h2>
+  <p class="sub">Tem cultura para todos os gostos. Por onde vamos começar?</p>
+  <ul class="cats">
+    <% categorias.forEach(function (c) { %>
+    <li><a class="cat" href="/eventos?categoria=<%= c.id %>">
+      <span class="cat__icone c-<%= c.cor %>"><svg class="icon" aria-hidden="true"><use href="#i-<%= c.icone %>"/></svg></span>
+      <span class="cat__nome"><%= c.nome %></span>
+    </a></li>
+    <% }) %>
+  </ul>
+
+  <h2 class="secao__sub">Seu próximo rolê começa aqui</h2>
+  <ul class="cards">
+    <% destaques.forEach(function (e) { %><%- include('partials/evento-card', { e: e }) %><% }) %>
+  </ul>
+  <p class="nota">* Eventos de exemplo do protótipo, não uma agenda confirmada.</p>
+  <a class="link-sm" href="/eventos">Ver todos os eventos<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</section>
+
+<section class="pontos-faixa">
+  <div class="wrap pontos">
+    <p class="overline overline--menta">Cultura que recompensa</p>
+    <h2>Aproveite a cidade. <span>Acumule vantagens.</span></h2>
+    <p class="pontos__texto">Conhecer coisas novas pode render ainda mais. Descubra como funciona o programa de pontos do CulturAqui.</p>
+    <a class="btn btn--branco" href="/cadastro">Quero fazer parte<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <ol class="passos">
+      <% passos.forEach(function (p) { %>
+      <li>
+        <span class="passos__n"><%= p.n %></span>
+        <span class="passos__icone"><svg class="icon" aria-hidden="true"><use href="#i-<%= p.icone %>"/></svg></span>
+        <strong><%= p.titulo %></strong>
+        <span><%= p.texto %></span>
+      </li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap secao" id="planos">
+  <p class="overline centro">Mais cultura para sua rotina</p>
+  <h2 class="centro">Escolha como viver tudo isso</h2>
+  <div class="planos">
+    <% planos.forEach(function (p) { %><%- include('partials/plano-card', { p: p }) %><% }) %>
+  </div>
+  <p class="nota">* Valores do protótipo. Não há pagamento real.</p>
+</section>
+
+<section class="wrap secao">
+  <p class="overline">Muito além do ingresso</p>
+  <h2>Mais praticidade para viver a cultura.</h2>
+  <ul class="beneficios">
+    <% beneficios.forEach(function (b) { %>
+    <li><span class="beneficios__check"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+      <div><strong><%= b.titulo %></strong><span><%= b.texto %></span></div></li>
+    <% }) %>
+  </ul>
+</section>
+
+<section class="wrap secao" id="avaliacoes">
+  <p class="overline centro">Experiências que conectam</p>
+  <h2 class="centro">A cultura fica melhor quando é compartilhada.</h2>
+  <p class="sub centro">Depoimentos ilustrativos do protótipo.</p>
+  <ul class="avaliacoes">
+    <% depoimentos.forEach(function (d) { %>
+    <li class="avaliacao">
+      <div class="estrelas" role="img" aria-label="5 de 5 estrelas"><% for (let i = 0; i < 5; i++) { %><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><% } %></div>
+      <blockquote>“<%= d.texto %>”</blockquote>
+      <p class="avaliacao__quem"><span class="avatar"><%= d.iniciais %></span><strong><%= d.usuario %></strong></p>
+    </li>
+    <% }) %>
+  </ul>
+</section>
+
+<section class="wrap secao">
+  <div class="cta">
+    <p class="overline overline--branco">Vem viver a cidade</p>
+    <h2>O próximo evento inesquecível está por aí.</h2>
+    <p>Crie seu acesso e comece a descobrir um mundo de possibilidades culturais.</p>
+    <a class="btn btn--amarelo" href="/cadastro">Comece por aqui<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+<%- include('partials/rodape') %>

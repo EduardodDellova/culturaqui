@@ -1,0 +1,59 @@
+<%#
+  Ilustração geométrica de exemplo para os cards e para a imagem do hero.
+  Recebe: variant ("hero", "a", "b", "c" ou "d").
+  Quando tiver as artes reais, troque o include por <img src="/img/arquivo.jpg" alt="...">.
+%>
+<% if (variant === 'hero') { %>
+<svg class="poster" viewBox="0 0 340 250" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arte Brasileira: Quadro a Quadro">
+  <rect width="340" height="250" fill="#10294A"/>
+  <rect width="116" height="250" fill="#C8573A"/>
+  <rect x="116" width="112" height="250" fill="#6FA08A"/>
+  <circle cx="48" cy="62" r="30" fill="#F7BE3E"/><circle cx="48" cy="62" r="11" fill="#10294A"/>
+  <path d="M0 250 C 14 180, 78 170, 116 250Z" fill="#E08A5E"/>
+  <circle cx="168" cy="62" r="42" fill="#F3E3C3"/><circle cx="168" cy="62" r="16" fill="#F7BE3E"/>
+  <path d="M116 250 C 128 196, 192 186, 228 250Z" fill="#2E6B58"/>
+  <circle cx="284" cy="70" r="44" fill="none" stroke="#C8573A" stroke-width="18"/><circle cx="284" cy="70" r="12" fill="#F3E3C3"/>
+  <path d="M228 250 C 246 204, 320 198, 340 250Z" fill="#1B3F66"/>
+  <rect x="60" y="106" width="170" height="82" rx="3" fill="#F7BE3E"/>
+  <g font-family="DM Sans, sans-serif" font-weight="800" font-size="21" fill="#10294A" letter-spacing="-.3">
+    <text x="72" y="130">ARTE</text><text x="72" y="150">BRASILEIRA</text><text x="72" y="170">QUADRO A</text><text x="72" y="190" dy="-1">QUADRO</text>
+  </g>
+</svg>
+<% } else if (variant === 'a') { %>
+<svg class="poster" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="100" height="120" fill="#10294A"/><rect width="36" height="120" fill="#C8573A"/><rect x="36" width="34" height="120" fill="#6FA08A"/>
+  <circle cx="16" cy="26" r="10" fill="#F7BE3E"/><circle cx="52" cy="28" r="14" fill="#F3E3C3"/><circle cx="52" cy="28" r="5" fill="#F7BE3E"/>
+  <circle cx="84" cy="30" r="13" fill="none" stroke="#C8573A" stroke-width="6"/>
+  <path d="M0 120 C 8 90, 28 88, 36 120Z" fill="#E08A5E"/><path d="M36 120 C 40 98, 62 96, 70 120Z" fill="#2E6B58"/>
+  <rect x="6" y="50" width="62" height="34" rx="2" fill="#F7BE3E"/>
+  <g font-family="DM Sans, sans-serif" font-weight="800" font-size="8.6" fill="#10294A"><text x="10" y="60">ARTE</text><text x="10" y="68">BRASILEIRA</text><text x="10" y="76">QUADRO A</text><text x="10" y="83">QUADRO</text></g>
+</svg>
+<% } else if (variant === 'b') { %>
+<svg class="poster" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="100" height="120" fill="#F2B5A8"/>
+  <circle cx="50" cy="46" r="30" fill="#F3E3C3"/>
+  <circle cx="39" cy="40" r="4.5" fill="#10294A"/><circle cx="61" cy="40" r="4.5" fill="#10294A"/>
+  <path d="M36 54 C 44 66, 56 66, 64 54" fill="none" stroke="#C8573A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M20 20 L34 28 L18 36Z" fill="#F7BE3E"/><path d="M82 18 L70 28 L84 34Z" fill="#6FA08A"/>
+  <rect x="0" y="82" width="100" height="38" fill="#C8573A"/>
+  <text x="50" y="104" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="15" fill="#F3E3C3" letter-spacing="1">TEATRO</text>
+</svg>
+<% } else if (variant === 'c') { %>
+<svg class="poster" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="100" height="120" fill="#F2A36B"/>
+  <circle cx="68" cy="36" r="20" fill="#F7BE3E"/>
+  <path d="M0 120 L22 58 L44 120Z" fill="#10294A"/><path d="M30 120 L56 46 L82 120Z" fill="#1B3F66"/><path d="M64 120 L84 66 L104 120Z" fill="#10294A"/>
+  <path d="M0 120 L100 120 L100 104 C 70 94, 30 112, 0 100Z" fill="#2E6B58"/>
+  <g font-family="DM Sans, sans-serif" font-weight="800" font-size="13" fill="#10294A" letter-spacing="-.2"><text x="8" y="22">SOM</text><text x="8" y="36">VIVO</text></g>
+</svg>
+<% } else { %>
+<svg class="poster" viewBox="0 0 100 120" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="100" height="120" fill="#CFE7DD"/>
+  <circle cx="74" cy="26" r="13" fill="#F7BE3E"/>
+  <path d="M8 44 C 28 36, 42 40, 50 50 L50 100 C 42 92, 28 90, 8 96Z" fill="#F3E3C3"/>
+  <path d="M92 44 C 72 36, 58 40, 50 50 L50 100 C 58 92, 72 90, 92 96Z" fill="#FFFFFF"/>
+  <path d="M50 50 L50 100" stroke="#6FA08A" stroke-width="2"/>
+  <path d="M14 54 C 26 50, 36 52, 44 58M14 64 C 26 60, 36 62, 44 68M14 74 C 26 70, 36 72, 44 78" fill="none" stroke="#C8573A" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M0 104 L100 104 L100 120 L0 120Z" fill="#2E6B58"/>
+</svg>
+<% } %>

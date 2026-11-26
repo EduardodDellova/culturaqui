@@ -1,0 +1,30 @@
+<%- include('partials/topo', { css: ['/css/home.css', '/css/paginas.css'] }) %>
+<section class="wrap pagina">
+  <nav aria-label="Você está em"><ol class="migalhas"><li><a href="/">Início</a></li><li aria-current="page">Eventos</li></ol></nav>
+  <h1>Eventos</h1>
+  <p class="lead">Encontre o que fazer em São Paulo. Filtre por categoria ou busque pelo nome.</p>
+
+  <form class="filtro" action="/eventos" method="get" role="search">
+    <div class="campo">
+      <label for="q">Buscar evento</label>
+      <div class="entrada"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="search" id="q" name="q" value="<%= q %>" placeholder="Ex.: teatro, Paulista" autocomplete="off"></div>
+    </div>
+    <div class="campo">
+      <label for="categoria">Categoria</label>
+      <div class="entrada"><select id="categoria" name="categoria">
+        <option value="">Todas</option>
+        <% categorias.forEach(function (c) { %><option value="<%= c.id %>"<%= categoria === c.id ? ' selected' : '' %>><%= c.nome %></option><% }) %>
+      </select></div>
+    </div>
+    <button class="btn btn--verde" type="submit">Filtrar</button>
+  </form>
+
+  <p class="contagem" aria-live="polite"><span id="total"><%= eventos.length %></span> evento(s) encontrado(s)</p>
+  <ul class="cards" id="lista-eventos">
+    <% eventos.forEach(function (e) { %><%- include('partials/evento-card', { e: e }) %><% }) %>
+  </ul>
+  <% if (!eventos.length) { %><p class="vazio">Nenhum evento encontrado. <a href="/eventos">Limpar filtros</a></p><% } %>
+  <p class="vazio" id="sem-resultado" hidden>Nenhum evento encontrado. <a href="/eventos">Limpar filtros</a></p>
+</section>
+<%- include('partials/rodape') %>

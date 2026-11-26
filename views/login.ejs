@@ -1,0 +1,14 @@
+<%- include('partials/topo', { css: ['/css/auth.css'] }) %>
+<section class="wrap auth">
+  <span class="tag">Bem-vindo de volta</span>
+  <h1>Entre na sua conta <span>do CulturAqui.</span></h1>
+  <p class="lead">Acesse para descobrir eventos e acumular pontos pelo caminho.</p>
+  <form class="cartao" action="/login" method="post" novalidate data-validar>
+    <% if (locals.erroGeral) { %><div class="alerta alerta--erro" role="alert"><%= erroGeral %></div><% } %>
+    <%- include('partials/campo', { id: 'usuario', label: 'Nome de usuário', icone: 'user', placeholder: 'Nome de usuário', autocomplete: 'username', regras: 'obrigatorio' }) %>
+    <%- include('partials/campo', { id: 'senha', label: 'Senha', icone: 'lock', tipo: 'password', placeholder: 'Digite sua senha', autocomplete: 'current-password', regras: 'obrigatorio' }) %>
+    <button class="btn btn--verde btn--bloco" type="submit">Entrar<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  </form>
+  <p class="alt">Não tem uma conta? <a href="/cadastro">Cadastre-se<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+</section>
+<%- include('partials/rodape') %>

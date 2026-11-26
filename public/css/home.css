@@ -1,0 +1,106 @@
+/* home.css: página inicial (e cards de plano/evento, usados também em /planos e /eventos) */
+
+/* Hero */
+.hero { display: grid; gap: 32px; padding-top: 32px; padding-bottom: 8px; }
+.hero h1 { margin-top: 16px; }
+.hero__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 24px; }
+.link-mais, .link-sm { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--green); }
+.link-sm { margin-top: 18px; }
+.hero__arte { position: relative; }
+.hero__cartaz { overflow: hidden; border-radius: 24px; aspect-ratio: 340 / 250; box-shadow: 0 24px 40px -24px rgba(16, 41, 74, 0.5); }
+.hero__cartaz .poster { width: 100%; height: 100%; }
+.chip { position: absolute; left: 14px; bottom: -16px; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: #fff; box-shadow: 0 10px 20px -8px rgba(16, 41, 74, 0.35); }
+.chip__icone { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 9px; background: var(--sage); color: var(--green); }
+.chip strong { display: block; font-size: 12.5px; }
+.chip small { display: block; font-size: 10.5px; color: var(--gray); }
+
+/* Seções */
+.secao { padding-top: 56px; }
+.secao__sub { margin-top: 36px; margin-bottom: 16px; font-size: 22px; }
+
+/* Categorias */
+.cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+.cat { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 6px; border: 1px solid var(--line); border-radius: 16px; background: #fff; font-size: 12.5px; font-weight: 700; text-align: center; transition: transform 0.15s; }
+.cat:hover { transform: translateY(-2px); }
+.cat__icone { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 14px; }
+.c-rose { background: #fde4ea; color: #c2305a; } .c-violet { background: #ece6fb; color: #6a45c9; }
+.c-green { background: var(--sage); color: var(--green); } .c-amber { background: #fdf0d3; color: #a86b00; }
+.c-blue { background: #e0ecfb; color: #1f5fb4; } .c-pink { background: #fde6f4; color: #b5348a; }
+
+/* Cards de evento */
+.cards { display: grid; gap: 16px; }
+.ev-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--raio); background: #fff; transition: transform 0.15s, box-shadow 0.15s; }
+.ev-card:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -20px rgba(16, 41, 74, 0.45); }
+.ev-card__link { display: block; }
+.ev-art { position: relative; aspect-ratio: 16 / 10; }
+.ev-art .poster { width: 100%; height: 100%; }
+.ev-tag { position: absolute; left: 12px; top: 12px; padding: 5px 10px; border-radius: 999px; background: #fff; font-size: 11px; font-weight: 800; }
+.ev-body { padding: 14px 16px 16px; }
+.ev-loc { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 13px; color: var(--gray); }
+.ev-loc .icon { width: 15px; height: 15px; }
+.ev-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--green); }
+.ev-foot span { display: flex; align-items: center; gap: 6px; }
+.ev-foot i { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sage); }
+
+/* Pontos */
+.pontos-faixa { margin-top: 56px; padding: 44px 0; background: var(--navy); color: #fff; }
+.overline--menta { color: var(--mint); } .overline--branco { color: #bdeedc; }
+.pontos h2 span { display: block; color: var(--mint); }
+.pontos__texto { margin: 12px 0 22px; max-width: 520px; color: #cdd8e6; }
+.passos { display: grid; gap: 14px; margin-top: 32px; }
+.passos li { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px; border-radius: 16px; background: rgba(255, 255, 255, 0.07); font-size: 14px; color: #cdd8e6; }
+.passos strong { color: #fff; font-size: 16px; }
+.passos__n { position: absolute; top: 14px; right: 16px; font-size: 12px; font-weight: 800; color: var(--yellow); }
+.passos__icone { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin-bottom: 6px; border-radius: 12px; background: var(--mint); color: var(--navy); }
+
+/* Planos */
+.planos { display: grid; gap: 16px; margin-top: 24px; }
+.plan { position: relative; padding: 22px; border: 1px solid var(--line); border-radius: var(--raio); background: #fff; }
+.plan--destaque { border: 2px solid var(--green); box-shadow: 0 20px 36px -24px rgba(27, 127, 99, 0.6); }
+.plan__selo { position: absolute; top: -12px; right: 18px; padding: 5px 12px; border-radius: 999px; background: var(--yellow); font-size: 11px; font-weight: 800; }
+.plan__desc { margin-top: 4px; font-size: 14px; color: var(--gray); }
+.plan__etiqueta { margin-top: 16px; font-size: 12px; font-weight: 700; color: var(--green); }
+.plan__preco { display: flex; align-items: baseline; gap: 4px; }
+.plan__preco b { font-size: 38px; letter-spacing: -0.03em; }
+.plan__preco span, .plan__preco small { font-size: 14px; color: var(--gray); }
+.plan__depois { margin-bottom: 14px; font-size: 12.5px; color: var(--muted); }
+.plan__itens { display: grid; gap: 8px; margin-bottom: 20px; font-size: 14px; }
+.plan__itens li { display: flex; align-items: center; gap: 8px; }
+.plan__itens .icon { color: var(--green); width: 17px; height: 17px; }
+.plan .btn { width: 100%; }
+
+/* Benefícios */
+.beneficios { display: grid; gap: 14px; margin-top: 20px; }
+.beneficios li { display: flex; gap: 12px; }
+.beneficios__check { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex: none; border-radius: 50%; background: var(--sage); color: var(--green); }
+.beneficios strong { display: block; } .beneficios span:not(.beneficios__check) { font-size: 14px; color: var(--gray); }
+
+/* Depoimentos */
+.avaliacoes { display: grid; gap: 14px; margin-top: 24px; }
+.avaliacao { padding: 20px; border: 1px solid var(--line); border-radius: var(--raio); background: #fff; }
+.estrelas { display: flex; gap: 2px; color: var(--yellow); } .estrelas .icon { fill: currentColor; stroke: none; width: 18px; height: 18px; }
+.avaliacao blockquote { margin: 12px 0 16px; font-size: 15px; }
+.avaliacao__quem { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.avatar { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--sage); color: var(--green); font-size: 12px; font-weight: 800; }
+
+/* Chamada final */
+.cta { padding: 32px 24px; border-radius: 28px; background: var(--green); color: #fff; }
+.cta p:not(.overline) { margin: 10px 0 20px; max-width: 480px; color: #def5ec; }
+
+/* ===== TABLET ===== */
+@media (min-width: 768px) {
+  .hero { grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; padding-top: 56px; }
+  .cats { grid-template-columns: repeat(4, 1fr); }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .passos, .avaliacoes { grid-template-columns: repeat(3, 1fr); }
+  .planos { grid-template-columns: repeat(3, 1fr); align-items: start; }
+  .beneficios { grid-template-columns: repeat(3, 1fr); }
+  .cta { padding: 48px; }
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 1024px) {
+  .cats { grid-template-columns: repeat(7, 1fr); }
+  .cards { grid-template-columns: repeat(4, 1fr); }
+  .hero { padding-top: 72px; }
+}

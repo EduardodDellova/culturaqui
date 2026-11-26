@@ -1,0 +1,19 @@
+/* auth.css: login, cadastro e contato (páginas com formulário) */
+.auth { max-width: 520px; padding-top: 32px; }
+.auth h1 { margin-top: 16px; }
+.cartao { margin-top: 24px; padding: 22px 20px; background: #fff; border: 1px solid var(--line); border-radius: var(--raio); box-shadow: 0 14px 30px -18px rgba(16, 41, 74, 0.25); }
+.bonus { display: flex; align-items: center; gap: 12px; margin-top: 22px; padding: 12px 16px; border-radius: 16px; background: var(--yellow); }
+.bonus__icone { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex: none; border-radius: 10px; background: rgba(16, 41, 74, 0.1); }
+.bonus strong { display: block; font-size: 15px; }
+.bonus small { font-size: 12px; color: rgba(16, 41, 74, 0.75); }
+.alt { margin-top: 20px; text-align: center; font-size: 14px; color: var(--gray); }
+.alt a { display: inline-flex; align-items: center; gap: 5px; margin-left: 3px; font-weight: 700; color: var(--green); }
+.alt .icon { width: 14px; height: 14px; }
+
+@media (min-width: 768px) {
+  .auth { padding-top: 56px; }
+  .cartao { padding: 30px; }
+}
+@media (min-width: 1024px) {
+  .auth { max-width: 560px; }
+}

@@ -1,0 +1,30 @@
+<%- include('partials/topo', { css: ['/css/home.css', '/css/paginas.css'] }) %>
+<section class="wrap pagina">
+  <nav aria-label="Você está em"><ol class="migalhas"><li><a href="/">Início</a></li><li aria-current="page">Planos</li></ol></nav>
+  <h1>Planos</h1>
+  <p class="lead">Uma opção para cada momento. Valores de exemplo do protótipo.</p>
+  <div class="planos">
+    <% planos.forEach(function (p) { %><%- include('partials/plano-card', { p: p }) %><% }) %>
+  </div>
+
+  <h2 class="secao__sub">Compare os planos</h2>
+  <div class="tabela-rolagem">
+    <table class="tabela">
+      <caption class="so-leitor">Comparativo entre os planos</caption>
+      <thead><tr><th scope="col">Recurso</th><th scope="col">Ultra</th><th scope="col">Confort</th><th scope="col">Básico</th></tr></thead>
+      <tbody>
+        <% comparativo.forEach(function (l) { %>
+        <tr><th scope="row"><%= l.item %></th><td><%= l.ultra %></td><td><%= l.confort %></td><td><%= l.basico %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="secao__sub">Perguntas frequentes</h2>
+  <div class="faq">
+    <% faq.forEach(function (f) { %>
+    <details><summary><%= f.p %></summary><p><%= f.r %></p></details>
+    <% }) %>
+  </div>
+</section>
+<%- include('partials/rodape') %>
