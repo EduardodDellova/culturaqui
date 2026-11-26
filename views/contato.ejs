@@ -3,7 +3,7 @@
   <span class="tag">Fale com a gente</span>
   <h1>Contato</h1>
   <p class="lead">Dúvidas, sugestões ou parcerias? Envie sua mensagem.</p>
-  <% if (erroGeral) { %><p class="alerta alerta--erro" role="alert"><%= erroGeral %></p><% } %>
+  <% if (locals.erroGeral) { %><p class="alerta alerta--erro" role="alert"><%= erroGeral %></p><% } %>
   <form class="cartao" action="/contato" method="post" novalidate data-validar>
     <%- include('partials/campo', { id: 'nome', label: 'Nome', icone: 'user', placeholder: 'Seu nome', autocomplete: 'name', regras: 'obrigatorio|min:3|max:80' }) %>
     <%- include('partials/campo', { id: 'email', label: 'E-mail', icone: 'mail', tipo: 'email', placeholder: 'Seu e-mail', autocomplete: 'email', regras: 'obrigatorio|email' }) %>

@@ -1,18 +1,29 @@
-# CulturAqui
 
-Roteiro cultural de São Paulo. Projeto de TCC feito com **Node.js + Express + EJS**.
-Eventos, planos, preços e depoimentos são **exemplos** (não há venda real).
-
-## Como rodar no seu computador
-
-```bash
+```powershell
 npm install
-cp .env.example .env     # configure SESSION_SECRET e os dados SMTP
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
 npm start                # abre em http://localhost:3000
 ```
 
-Requer Node 18 ou mais novo.
-O formulário de contato envia e-mails para `EMAIL_DESTINO`. Para habilitar o envio, configure `SMTP_HOST`, `SMTP_USER` e `SMTP_PASS`; `SMTP_PORT` usa 587 por padrão e `SMTP_SECURE` usa `false`.
+Requer Node 18 ou mais novo. Se o `.env` já existir, edite-o em vez de copiá-lo novamente: ele contém configurações locais e não deve ser compartilhado.
+
+## Configuração do `.env`
+
+O servidor carrega o arquivo `.env` da raiz do projeto ao iniciar. Copie `.env.example` para `.env` apenas na primeira configuração e preencha os dados do seu provedor SMTP:
+
+| Variável | O que preencher |
+|---|---|
+| `PORT` | Porta local do servidor (padrão: `3000`). |
+| `NODE_ENV` | `development` localmente; `production` na hospedagem. |
+| `SESSION_SECRET` | Uma chave aleatória e privada para proteger sessões. |
+| `EMAIL_DESTINO` | Endereço que receberá as mensagens do formulário. |
+| `SMTP_HOST` | Host SMTP do seu provedor de e-mail. |
+| `SMTP_PORT` | Porta SMTP; normalmente `587` para STARTTLS ou `465` para TLS. |
+| `SMTP_SECURE` | `false` com a porta `587`; `true` com a porta `465`. |
+| `SMTP_USER` | Usuário SMTP, geralmente seu endereço de e-mail. |
+| `SMTP_PASS` | Senha SMTP ou senha de aplicativo fornecida pelo provedor. |
+
+No Gmail, por exemplo, use `smtp.gmail.com`, porta `587` e `SMTP_SECURE=false`; a senha deve ser uma senha de app (com a verificação em duas etapas ativada), não a senha normal da conta. Depois de salvar o `.env`, reinicie o servidor. Sem `SMTP_HOST`, `SMTP_USER` e `SMTP_PASS`, a página de contato abre, mas o envio informa que o serviço ainda não está configurado.
 
 ## O que cada pasta faz
 
@@ -49,24 +60,6 @@ O formulário de contato envia e-mails para `EMAIL_DESTINO`. Para habilitar o en
 | `POST /conta/excluir` | Exclui a conta (pede a senha para confirmar); o e-mail e o usuário ficam livres para novo cadastro | só logados |
 | qualquer outro | Página 404 | — |
 
-## Requisitos da banca e onde estão
-
-1. **HTML semântico, CSS e JS externos**: `header`, `nav`, `main`, `section`, `article`, `footer`, `address`, `details`, `table`, `ol` (migalhas). Nenhum `style`, `<script>` ou `onclick` dentro do HTML; tudo em `public/css` e `public/js`.
-2. **Mobile first**: o CSS base é o do celular; telas maiores usam `min-width`.
-3. **Responsividade em mais 2 tamanhos**: tablet `@media (min-width: 768px)` e desktop `@media (min-width: 1024px)` (navegação rápida fixa no celular e menu completo em barra horizontal no desktop).
-4. **Validação de campos no front-end com JS**: `public/js/validacao.js`, ativada com `data-validar` no formulário e `data-regras="obrigatorio|min:3|email"` nos campos.
-5. **Hospedado**: veja abaixo.
-6. **SharePoint como documentação**: documento "CulturAqui: documentação" (exportável para Word/PDF para anexar no SharePoint).
-7. **Validação no back-end com express-validator**: `validators/auth.js` e `validators/contato.js`, usadas em `routes/auth.js` e `routes/contato.js`.
-
-## Como hospedar (Render, grátis)
-
-1. Crie um repositório no GitHub e envie esta pasta (`git init`, `git add .`, `git commit`, `git push`). O `.gitignore` já exclui `node_modules` e `.env`.
-2. Em render.com, crie conta e clique em **New + > Blueprint** (ou **Web Service**) e escolha o repositório.
-3. Se usar Web Service manual: Build Command `npm install`, Start Command `npm start`, e variáveis `NODE_ENV=production`, `SESSION_SECRET` (texto longo aleatório) e SMTP (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`). O destinatário `EMAIL_DESTINO` já fica definido como `culturaquii@gmail.com`; o `render.yaml` também solicita as configurações SMTP no modo Blueprint.
-4. Após o deploy, copie o link `https://culturaqui.onrender.com` (ou semelhante) e coloque no SharePoint.
-
-Atenção: no plano grátis o servidor "dorme" após alguns minutos sem uso (o primeiro acesso demora) e **os arquivos de `storage/` são apagados a cada novo deploy/reinício**. Para dados permanentes, use um banco (PostgreSQL ou MongoDB).
 
 ## Segurança já aplicada
 
