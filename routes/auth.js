@@ -12,6 +12,7 @@ const router = express.Router();
 // Guarda o usuário na sessão. Troca o id da sessão (regenerate) para evitar "session fixation".
 const iniciarSessao = (req, res, usuario, proximo) => {
   const destino = req.session.voltarPara || "/perfil";
+  delete req.session.voltarPara;
   req.session.regenerate((erro) => {
     if (erro) return proximo(erro);
     req.session.usuario = usuario;
@@ -45,7 +46,7 @@ router.post("/cadastro", soVisitante, regrasCadastro(), (req, res, next) => {
     usuario: req.body.usuario,
     email: req.body.email,
     senha: req.body.senha,
-    plano: req.body.plano,
+    plano: "nenhum",
   });
   req.session.voltarPara = ["ultra", "confort", "basico"].includes(req.body.plano)
     ? `/comprar/${req.body.plano}`
