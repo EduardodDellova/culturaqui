@@ -29,6 +29,20 @@
     igual: function (campo, valor, seletor) {
       var outro = document.querySelector(seletor);
       return outro && valor === outro.value ? "" : "As senhas não coincidem.";
+    },
+    cpf: function (campo, valor) {
+      var cpf = valor.replace(/\D/g, "");
+      return /^\d{11}$/.test(cpf) ? "" : "O CPF deve ter exatamente 11 números.";
+    },
+    cartao: function (campo, valor) {
+      var cartao = valor.replace(/\D/g, "");
+      return /^\d{16}$/.test(cartao) ? "" : "O número do cartão deve ter exatamente 16 números.";
+    },
+    codigo: function (campo, valor) {
+      return /^\d{3}$/.test(valor) ? "" : "O código deve ter exatamente 3 números.";
+    },
+    validade: function (campo, valor) {
+      return /^(0[1-9]|1[0-2])\/\d{2}$/.test(valor) ? "" : "Use uma validade válida no formato MM/AA.";
     }
   };
 

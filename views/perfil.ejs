@@ -6,7 +6,7 @@
     <article class="bloco bloco--pontos"><h2>Seus pontos</h2><p class="pontos-num"><%= usuario.pontos %></p><p>Pontos de boas-vindas já creditados.</p></article>
     <article class="bloco"><h2>Seus dados</h2>
       <dl class="dados"><div><dt>Usuário</dt><dd><%= usuario.usuario %></dd></div><div><dt>E-mail</dt><dd><%= usuario.email %></dd></div>
-      <div><dt>Plano</dt><dd><%= usuario.plano === 'nenhum' ? 'Nenhum plano escolhido' : usuario.plano %></dd></div></dl>
+      <div><dt>Plano</dt><dd><%= usuario.plano === 'nenhum' ? 'Nenhum plano escolhido' : ({ ultra: 'Cultura Ultra', confort: 'Cultura Confort', basico: 'Cultura Básico' }[usuario.plano] || usuario.plano) %></dd></div></dl>
     </article>
   </div>
   <a class="btn btn--verde" href="/eventos">Explorar eventos<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>

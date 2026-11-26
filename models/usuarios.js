@@ -68,3 +68,12 @@ exports.excluir = (id) => {
   gravar(ARQUIVO, restantes);
   return true;
 };
+
+exports.atualizarPlano = (id, plano) => {
+  const lista = ler(ARQUIVO);
+  const usuario = lista.find((u) => u.id === id);
+  if (!usuario) return null;
+  usuario.plano = plano;
+  gravar(ARQUIVO, lista);
+  return publico(usuario);
+};

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="icon" type="image/png" href="/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="/css/compra.css">
+</head>
+<body class="comprar">
+  <header class="comprar__topo">
+    <a class="acao-voltar__link" href="/planos" aria-label="Voltar aos planos">
+      <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <span>Voltar</span>
+    </a>
+  </header>
+  <%- include('partials/icones') %>
+  <main class="comprar__main">
+    <aside class="comprar__plano">
+      <span class="tag">Plano escolhido</span>
+      <h1><%= plano.nome %></h1>
+      <p class="comprar__beneficio"><%= plano.descricao %></p>
+      <p class="comprar__preco"><small>R$</small> <strong><%= plano.preco %></strong> <span><%= plano.sufixo %></span></p>
+      <p class="comprar__depois"><%= plano.depois %></p>
+      <ul class="comprar__itens">
+        <% plano.itens.forEach(function (item) { %><li>✓ <%= item %></li><% }) %>
+      </ul>
+    </aside>
+
+    <form class="comprar__form cartao" action="/comprar/<%= plano.id %>" method="post" novalidate data-validar>
+      <% if (novoCadastro) { %>
+      <section>
+        <span class="comprar__etapa">1</span>
+        <h2>Crie sua conta</h2>
+        <%- include('partials/campo', { id: 'usuario', label: 'Nome de usuário', icone: 'user', placeholder: 'Nome de usuário', autocomplete: 'username', regras: 'obrigatorio|min:3|max:20|usuario', ajuda: 'Letras, números, ponto e _ (3 a 20).' }) %>
+        <%- include('partials/campo', { id: 'email', label: 'E-mail', icone: 'mail', tipo: 'email', placeholder: 'Digite seu e-mail', autocomplete: 'email', regras: 'obrigatorio|email' }) %>
+        <%- include('partials/campo', { id: 'senha', label: 'Senha', icone: 'lock', tipo: 'password', placeholder: 'Digite sua senha', autocomplete: 'new-password', regras: 'obrigatorio|min:8|max:64|senha', ajuda: 'Mínimo de 8 caracteres, com letra e número.' }) %>
+        <%- include('partials/campo', { id: 'confirmar', label: 'Confirmar senha', icone: 'lock', tipo: 'password', placeholder: 'Confirme sua senha', autocomplete: 'new-password', regras: 'obrigatorio|igual:#senha' }) %>
+      </section>
+      <% } %>
+
+      <section class="comprar__pagamento">
+        <span class="comprar__etapa"><%= novoCadastro ? '2' : '1' %></span>
+        <h2>Dados da compra</h2>
+
+        <fieldset class="pagamento">
+          <legend>Forma de pagamento</legend>
+          <label class="pagamento__opcao">
+            <input type="radio" name="pagamento" value="credito" data-regras="obrigatorio"<%= valores.pagamento === 'credito' ? ' checked' : '' %>>
+            <span>Cartão de crédito</span>
+          </label>
+          <label class="pagamento__opcao">
+            <input type="radio" name="pagamento" value="debito" data-regras="obrigatorio"<%= valores.pagamento === 'debito' ? ' checked' : '' %>>
+            <span>Cartão de débito</span>
+          </label>
+        </fieldset>
+        <p class="campo__erro" id="pagamento-erro" role="alert"><%= erros.pagamento ? erros.pagamento.msg : '' %></p>
+
+        <div class="campo">
+          <label for="nomeTitular">Nome do titular</label>
+          <div class="entrada"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><input id="nomeTitular" name="nomeTitular" value="<%= valores.nomeTitular || '' %>" minlength="3" maxlength="80" data-regras="obrigatorio|min:3|max:80" placeholder="Nome impresso no cartão" autocomplete="cc-name"></div>
+          <p class="campo__erro" id="nomeTitular-erro" role="alert"><%= erros.nomeTitular ? erros.nomeTitular.msg : '' %></p>
+        </div>
+
+        <div class="campo">
+          <label for="cpf">CPF</label>
+          <div class="entrada"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><input id="cpf" name="cpf" value="<%= valores.cpf || '' %>" minlength="11" maxlength="14" inputmode="numeric" data-regras="obrigatorio|cpf" placeholder="000.000.000-00" autocomplete="off"></div>
+          <p class="campo__erro" id="cpf-erro" role="alert"><%= erros.cpf ? erros.cpf.msg : '' %></p>
+        </div>
+
+        <div class="campo">
+          <label for="cartao">Número do cartão</label>
+          <div class="entrada"><svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg><input id="cartao" name="cartao" value="<%= valores.cartao || '' %>" minlength="16" maxlength="19" inputmode="numeric" data-regras="obrigatorio|cartao" placeholder="0000 0000 0000 0000" autocomplete="cc-number"></div>
+          <p class="campo__erro" id="cartao-erro" role="alert"><%= erros.cartao ? erros.cartao.msg : '' %></p>
+        </div>
+
+        <div class="comprar__linha">
+          <div class="campo">
+            <label for="validade">Validade</label>
+            <div class="entrada"><input id="validade" name="validade" value="<%= valores.validade || '' %>" minlength="5" maxlength="5" data-regras="obrigatorio|validade" placeholder="MM/AA" autocomplete="cc-exp"></div>
+            <p class="campo__erro" id="validade-erro" role="alert"><%= erros.validade ? erros.validade.msg : '' %></p>
+          </div>
+          <div class="campo">
+            <label for="codigo">Código</label>
+            <div class="entrada"><input id="codigo" name="codigo" value="<%= valores.codigo || '' %>" minlength="3" maxlength="3" inputmode="numeric" data-regras="obrigatorio|codigo" placeholder="CVV" autocomplete="cc-csc"></div>
+            <p class="campo__erro" id="codigo-erro" role="alert"><%= erros.codigo ? erros.codigo.msg : '' %></p>
+          </div>
+        </div>
+      </section>
+
+      <% if (novoCadastro) { %><div class="campo campo--check"><label class="check" for="termos"><input id="termos" name="termos" type="checkbox" data-regras="obrigatorio"<%= valores.termos === 'on' ? ' checked' : '' %>><span>Aceito os termos de uso e confirmo os dados da compra.</span></label><p class="campo__erro" id="termos-erro"><%= erros.termos ? erros.termos.msg : '' %></p></div><% } %>
+      <button class="btn btn--verde btn--bloco" type="submit">Escolher <%= plano.nome %></button>
+    </form>
+  </main>
+  <script src="/js/validacao.js"></script>
+  <script src="/js/compra.js"></script>
+</body>
+</html>

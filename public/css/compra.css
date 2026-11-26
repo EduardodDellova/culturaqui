@@ -1,0 +1,31 @@
+body.comprar { padding: 0; background: #eef4f7; }
+.comprar__topo { position: sticky; top: 0; z-index: 20; padding: 12px 20px; background: rgba(238,244,247,.96); border-bottom: 1px solid var(--line); }
+.comprar__topo .acao-voltar__link { border-radius: 10px; }
+.comprar__main { display: grid; width: min(520px, 100%); margin: 0 auto; }
+.comprar__plano { padding: 28px 20px 22px; border-bottom: 1px solid var(--line); background: #fff; }
+.comprar__plano h1 { margin-top: 10px; font-size: 32px; }
+.comprar__beneficio { margin-top: 6px; color: var(--gray); }
+.comprar__preco { display: flex; align-items: baseline; gap: 5px; margin-top: 14px; }
+.comprar__preco strong { font-size: 38px; }
+.comprar__preco small, .comprar__preco span, .comprar__depois { color: var(--gray); font-size: 13px; }
+.comprar__itens { display: grid; gap: 6px; margin-top: 12px; color: var(--green); font-size: 14px; }
+.comprar__form.cartao { width: 100%; margin: 0; padding: 22px 20px 28px; border: 0; border-radius: 0; box-shadow: none; }
+.comprar__form section + section { margin-top: 26px; }
+.comprar__pagamento { padding-top: 20px; border-top: 1px solid var(--line); }
+.comprar__etapa { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--green); color: #fff; font-size: 12px; font-weight: 800; }
+.comprar__form h2 { display: inline; font-size: 20px; }
+.pagamento { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; border: 0; }
+.pagamento legend { margin-bottom: 8px; font-size: 12.5px; font-weight: 700; }
+.pagamento__opcao { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 48px; padding: 8px; border: 1.5px solid var(--field); border-radius: 12px; background: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
+.pagamento__opcao:has(input:checked) { border-color: var(--green); background: var(--sage); color: var(--green); }
+.pagamento__opcao input { accent-color: var(--green); }
+.comprar__linha { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.comprar__linha .campo + .campo { margin-top: 15px; }
+.comprar__form .campo--check { margin-top: 18px; }
+.comprar__form .btn--bloco { margin-top: 18px; }
+@media (min-width: 768px) {
+  .comprar__topo { padding: 16px 32px; }
+  .comprar__main { width: min(880px, calc(100% - 64px)); grid-template-columns: 280px 1fr; align-items: start; margin-top: 28px; gap: 16px; }
+  .comprar__plano { position: sticky; top: 76px; border: 1px solid var(--line); border-radius: var(--raio); }
+  .comprar__form.cartao { border: 1px solid var(--line); border-radius: var(--raio); }
+}

@@ -63,6 +63,11 @@ router.get("/sobre", (req, res) => {
 
 // Área restrita: só para quem está logado
 router.get("/perfil", exigeLogin, (req, res) => {
+  const usuarios = require("../models/usuarios");
+  const atual = usuarios.buscarPorId(req.session.usuario.id);
+  if (!atual) return res.redirect("/login");
+
+  req.session.usuario = atual;
   res.render("perfil", { title: "Meu perfil | CulturAqui", planos });
 });
 

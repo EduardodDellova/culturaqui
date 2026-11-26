@@ -4,6 +4,8 @@ const { validationResult } = require("express-validator");
 const usuarios = require("../models/usuarios");
 const { soVisitante, exigeLogin } = require("../middlewares/autenticacao");
 const { regrasCadastro, regrasLogin, regrasExcluirConta } = require("../validators/auth");
+const { regrasCompra } = require("../validators/comprar");
+const { planos } = require("../data/planos");
 
 const router = express.Router();
 
@@ -102,6 +104,79 @@ router.post("/conta/excluir", exigeLogin, regrasExcluirConta(), (req, res, next)
     req.session.flash = { tipo: "sucesso", texto: "Sua conta foi excluída. Seus dados de cadastro foram apagados." };
     req.session.save((erro2) => (erro2 ? next(erro2) : res.redirect("/")));
   });
+});
+
+// ---------- Compra de plano ----------
+router.get("/comprar/:plano", (req, res) => {
+  const plano = planos.find((p) => p.id === req.params.plano);
+  if (!plano) return res.redirect("/planos");
+
+  res.render("compra", {
+    title: `Assinar ${plano.nome} | CulturAqui`,
+    plano,
+    novoCadastro: !req.session.usuario,
+    js: ["/js/validacao.js", "/js/compra.js"],
+  });
+});
+
+router.post("/comprar/:plano", regrasCompra(), (req, res, next) => {
+  const plano = planos.find((p) => p.id === req.params.plano);
+  if (!plano) return res.redirect("/planos");
+
+  let erros = validationResult(req).mapped();
+
+  if (!req.session.usuario) {
+    const cadastro = regrasCadastro();
+    const promessas = cadastro.map((regra) => regra.run(req));
+    Promise.all(promessas)
+      .then(() => {
+        const resultadoCadastro = validationResult(req);
+        erros = { ...resultadoCadastro.mapped(), ...erros };
+        if (Object.keys(erros).length) {
+          const { senha, confirmar, ...valores } = req.body;
+          return res.status(422).render("compra", {
+            title: `Assinar ${plano.nome} | CulturAqui`,
+            plano,
+            novoCadastro: true,
+            erros,
+            valores,
+            js: ["/js/validacao.js", "/js/compra.js"],
+          });
+        }
+
+        const novo = usuarios.criar({
+          usuario: req.body.usuario,
+          email: req.body.email,
+          senha: req.body.senha,
+          plano: plano.id,
+        });
+        req.session.regenerate((erro) => {
+          if (erro) return next(erro);
+          req.session.usuario = novo;
+          req.session.flash = { tipo: "sucesso", texto: `${plano.nome} contratado com sucesso!` };
+          req.session.save((erro2) => (erro2 ? next(erro2) : res.redirect("/perfil")));
+        });
+      })
+      .catch(next);
+    return;
+  }
+
+  if (Object.keys(erros).length) {
+    const valores = req.body;
+    return res.status(422).render("compra", {
+      title: `Assinar ${plano.nome} | CulturAqui`,
+      plano,
+      novoCadastro: false,
+      erros,
+      valores,
+      js: ["/js/validacao.js", "/js/compra.js"],
+    });
+  }
+
+  const atualizado = usuarios.atualizarPlano(req.session.usuario.id, plano.id);
+  if (atualizado) req.session.usuario = atualizado;
+  req.session.flash = { tipo: "sucesso", texto: `${plano.nome} contratado com sucesso!` };
+  req.session.save((erro) => (erro ? next(erro) : res.redirect("/perfil")));
 });
 
 module.exports = router;

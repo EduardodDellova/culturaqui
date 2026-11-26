@@ -10,5 +10,5 @@
     <% p.itens.forEach(function (i) { %><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><%= i %></li>
     <% }) %>
   </ul>
-  <a class="btn <%= p.destaque ? 'btn--verde' : 'btn--contorno' %>" href="/cadastro?plano=<%= p.id %>"><%= p.botao %><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  <a class="btn <%= p.destaque ? 'btn--verde' : 'btn--contorno' %>" href="/comprar/<%= p.id %>"><%= p.botao %><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 </article>
