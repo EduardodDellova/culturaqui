@@ -47,7 +47,9 @@ router.post("/cadastro", soVisitante, regrasCadastro(), (req, res, next) => {
     senha: req.body.senha,
     plano: req.body.plano,
   });
-  req.session.voltarPara = null;
+  req.session.voltarPara = ["ultra", "confort", "basico"].includes(req.body.plano)
+    ? `/comprar/${req.body.plano}`
+    : null;
   iniciarSessao(req, res, novo, next);
 });
 
